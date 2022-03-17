@@ -738,21 +738,53 @@
         new Splide( '#honestmaterials-slider', {arrows: false} ).mount();
         new Splide( '#studiospace0-slider', {arrows: false} ).mount();
 
-        $(document).ready(function(){
-            $('.bullet').on('click', function(e){
-                let r = "." + $(this).attr('data-reason')
-                $('.bulletcontainer').slideToggle()
+        let openedreason = ""
 
-                $('.close').show()
-                $(r).show()
+        $('section#invest .bullet').on('click', function() {
+            openedreason = $(this).attr('data-reason')
 
-            })
-            $('.smallbullets').on('click', function(c){
-                let r = "." + $(this).attr('data-reason')
-                $('.bulletcontainer').slideToggle()
-                $(r).show()
-            })
-        })
+            $('section#invest').removeClass()
+            $('section#invest').addClass('opened')
+            $('section#invest').addClass($(this).attr('data-reason'))
+            $('section#invest .bulletcontainer').hide();
+            $('section#invest > h1').hide();
+            let r = '.' + $(this).attr('data-reason');
+            $(r).show();
+            $('.smallbullets li').removeClass('active');
+            $(r).addClass('active');
+            $('section#invest .close').show();
+            $('html, body').animate({
+                scrollTop: $("#invest").offset().top
+            });
+        });
+
+
+        $('section#invest .close li').on('click', function() {
+            let r = '.' + $(this).attr('data-reason');
+
+            if (openedreason != $(this).attr('data-reason')) {
+                openedreason = $(this).attr('data-reason')
+                $('section#invest').removeClass()
+                $('section#invest').addClass('opened')
+                $('section#invest').addClass($(this).attr('data-reason'))
+
+
+                $("section#invest .investreason").hide();
+                $('section#invest .close li').removeClass('active')
+                $(this).addClass('active')
+                $(r).show();
+            } else {
+                $('section#invest').removeClass()
+                $("section#invest .investreason").hide();
+                $('section#invest > h1').show();
+                $('section#invest .bulletcontainer').show();
+            }
+
+
+            $('html, body').animate({
+                scrollTop: $("#invest").offset().top
+            });
+        });
     </script>
 </body>
 
