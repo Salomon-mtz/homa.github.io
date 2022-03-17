@@ -740,7 +740,7 @@
 
         $(document).ready(function(){
             $('.bullet').on('click', function(e){
-                let r = "#" + $(this).attr('data-reason')
+                let r = "." + $(this).attr('data-reason')
                 $('.bulletcontainer').slideToggle()
 
                 $('.close').show()
@@ -748,14 +748,25 @@
 
             })
             $('.smallbullets').on('click', function(c){
+                let r = "." + $(this).attr('data-reason')
                 $('.bulletcontainer').slideToggle()
-
-                $('.close').hide()
-                $(r).hide()
-
+                $(r).show()
             })
         })
     </script>
 </body>
 
 </html>
+
+let v = "";
+            $("section#invest .bullet").on("click", function() {
+                $("#invest-instructions").hide(), v = $(this).attr("data-reason"), $("section#invest").removeClass(), $("section#invest").addClass("opened"), $("section#invest").addClass($(this).attr("data-reason")), $("section#invest .bulletcontainer").hide(), $("section#invest > h1").hide();
+                let e = "." + $(this).attr("data-reason");
+                $(e).show(), $(".smallbullets li").removeClass("active"), $(e).addClass("active"), $("section#invest .close").show(), $("html, body").animate({
+                    scrollTop: $("#invest").offset().top
+                })
+            }), $("section#invest .close li").on("click", function() {
+                let e = "." + $(this).attr("data-reason");
+                v != $(this).attr("data-reason") ? (v = $(this).attr("data-reason"), $("section#invest").removeClass(), $("section#invest").addClass("opened"), $("section#invest").addClass($(this).attr("data-reason")), $("section#invest .investreason").hide(), $("section#invest .close li").removeClass("active"), $(this).addClass("active"), $(e).show()) : ($("section#invest").removeClass(), $("section#invest .investreason").hide(), $("section#invest > h1").show(), $("section#invest .bulletcontainer").show()), $("html, body").animate({
+//                    scrollTop: $("#invest").offset().top
+                })
